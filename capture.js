@@ -14,8 +14,21 @@ else{
 	page.viewportSize = { width: 1920, height: 1080 };
 }
 
-capture = function(){
-	var image = './images/'+url.replace('http://', '')+'_'+size+'.jpg';
+function slugify(txt){
+    return txt
+    .replace('http://', '')
+    .replace('www.', '')
+    .replace('.', '-')
+    .toLowerCase()
+    .replace(/ /g,'-')
+    .replace(/[^\w-]+/g,'');
+}
+
+function capture(){
+	if (!size) {
+		size = 'desktop';
+	};
+	var image = './images/'+slugify(url)+'_'+size+'.jpg';
 	return page.render(image);	
 }
 
