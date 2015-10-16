@@ -1,0 +1,15 @@
+{
+  "name": "capture",
+  "version": "0.0.1",
+  "description": "",
+  "main": "capture.js",
+  "dependencies": {
+    "phantom": "^0.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wessel van der Pal",
+  "license": "ISC"
+}
