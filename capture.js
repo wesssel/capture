@@ -17,6 +17,7 @@ else{
 function slugify(txt){
     return txt
     .replace('http://', '')
+    .replace('https://', '')
     .replace('www.', '')
     .replace('.', '-')
     .toLowerCase()
@@ -24,15 +25,19 @@ function slugify(txt){
     .replace(/[^\w-]+/g,'');
 }
 
+function imagePath(){
+  if (!size) {
+    size = 'desktop';
+  };
+  return './images/'+slugify(url)+'_'+size+'.jpg';
+}
+
 function capture(){
-	if (!size) {
-		size = 'desktop';
-	};
-	var image = './images/'+slugify(url)+'_'+size+'.jpg';
-	return page.render(image);	
+	return page.render(imagePath());	
 }
 
 page.open(url, function(status) {
   capture()
+  console.log('Image can be found in: '+imagePath())
   phantom.exit();
 });
