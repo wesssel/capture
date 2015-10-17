@@ -1,6 +1,22 @@
-# capture
-Capture a page by using terminal
+# Capture
 
-After unpacking the files type: npm install
+Capture a page by using terminal. Made with PhantomJS
 
-Use by typing: phantomjs capturejs <website url>
+## Requirements
+
+  * [Node.js](http://nodejs.org)
+
+## Install
+
+  * Download and unpack this project
+  * Run `npm install` to install PhantomJS
+
+## Capture page
+
+  * Go to capture directive and type `phantomjs capture.js WEBSITE_URL`
+
+## Capture mobile or tablet
+  
+  * To capture a mobile or tablet page  type `phantomjs capture.js WEBSITE_URL TABLET/MOBILE`
+
+  
