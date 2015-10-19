@@ -12,7 +12,7 @@ else if(size == 'tablet'){
 	page.viewportSize = { width: 768, height: 1024 };
 }
 else if(size > 0){
-  page.viewportSize = { width: size, height: size };
+  page.viewportSize = { width: size, height: (size*0.6) };
 }
 else{
 	page.viewportSize = { width: 1920, height: 1080 };
