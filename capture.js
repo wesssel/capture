@@ -30,15 +30,15 @@ page.onError = function(msg, trace) {
 };
 
 /* clean file name */
-function slugify(txt){
-    return txt
-    .replace('http://', '')
-    .replace('https://', '')
-    .replace('www.', '')
-    .replace('.', '-')
-    .toLowerCase()
-    .replace(/ /g,'-')
-    .replace(/[^\w-]+/g,'');
+function fileName(url){
+  var stripUrl = url.replace('http://', '').replace('https://', '');
+  var splitUrl = stripUrl.split('.');
+  if (url.search("www.") != -1) {
+    return splitUrl[1];
+  }
+  else{
+    return splitUrl[0];
+  }
 }
 
 /* image path */
@@ -46,7 +46,7 @@ function imagePath(){
   if (!size) {
     size = 'desktop';
   };
-  return './images/'+slugify(url)+'_'+size+'.jpg';
+  return './images/'+fileName(url)+'_'+size+'.jpg';
 }
 
 /* capture page */
