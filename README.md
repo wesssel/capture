@@ -1,6 +1,6 @@
 # Capture
 
-Capture a page by using terminal. Made with PhantomJS
+Capture a page by using terminal. Made with jQueryGo
 
 ## Requirements
 
@@ -8,11 +8,11 @@ Capture a page by using terminal. Made with PhantomJS
 
 ## Install
 
-  * Download and unpack this project
+  * Type in commandprom/terminal `npm install -g capture-now`
 
 ## Capture page
 
-  * Go to capture directive and type `node capture.js`
+  * Use by typing in `capture-now`
 
 
 

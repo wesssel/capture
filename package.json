@@ -1,10 +1,15 @@
 {
-  "name": "capture",
-  "version": "0.0.0",
-  "description": "",
-  "main": "capture.js",
+  "name": "capture-now",
+  "version": "2.1.0",
+  "description": "Capture a page by using terminal",
+  "main": "./lib/capture-now.js",
+  "bin": {
+    "capture-now": "./bin/capture-now"
+  },
   "dependencies": {
-    "phantom": "^0.8.0"
+    "async": "^1.4.2",
+    "prompt": "^0.2.14",
+    "jquerygofix": "^0.0.16"
   },
   "devDependencies": {},
   "scripts": {
@@ -12,8 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wesssel/capture"
+    "url": "git+https://github.com/wesssel/capture.git"
   },
-  "author": "Wessel van der Pal",
-  "license": "ISC"
+  "author": "Wessel van der Pal <wesselvanderpal@gmail.com> (http://wesselvanderpal.nl)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wesssel/capture/issues"
+  },
+  "homepage": "https://github.com/wesssel/capture#readme"
 }
