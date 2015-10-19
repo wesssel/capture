@@ -1,68 +1,59 @@
-var page 	= require('webpage').create();
-var system 	= require('system');
+var $ = require('jquerygo');
+var prompt = require('prompt');
+var async = require('async');
+var x = {};
 
-var url 	= system.args[1];
-var size 	= system.args[2];
 
-/* screen width */
-if (size == 'phone') {
-	page.viewportSize = { width: 320, height: 568 };
+var capture = function(fileName) {
+  return function(done) {
+    var dir = __dirname + '/images';
+    $.capture(dir + '/' + fileName + '.jpg', done);
+  }
 }
-else if(size == 'tablet'){
-	page.viewportSize = { width: 768, height: 1024 };
-}
-else if(size > 0){
-  page.viewportSize = { width: size, height: (size*0.6) };
-}
-else{
-	page.viewportSize = { width: 1920, height: 1080 };
-}
-
-/* disable jQuery errors */
-page.onError = function(msg, trace) {
-    var msgStack = ['ERROR: ' + msg];
-    if (trace && trace.length) {
-        msgStack.push('TRACE:');
-        trace.forEach(function(t) {
-            msgStack.push(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function "' + t.function + '")' : ''));
-        });
-    }
-};
 
 /* clean file name */
-function fileName(url){
+var fileName = function(url, width){
   var stripUrl = url.replace('http://', '').replace('https://', '');
   var splitUrl = stripUrl.split('.');
   if (url.search("www.") != -1) {
-    return splitUrl[1];
+    return splitUrl[1] + '_' + width;
   }
   else{
-    return splitUrl[0];
+    return splitUrl[0] + '_' + width;
   }
 }
 
-/* image path */
-function imagePath(){
-  if (!size) {
-    size = 'desktop';
-  };
-  return './images/'+fileName(url)+'_'+size+'.jpg';
+prompt.start();
+
+var getWebsite = function(){
+
+  prompt.addProperties(x, ['website', 'width'], function (err) {
+
+    $.config.width = x.width;
+    $.config.height = x.width * 0.6;
+
+    if (!x.website) {
+      console.log('Error no website set'),
+      $.close();
+    };
+
+    if (!x.width) {
+      $.config.width = 1920;
+      $.config.height = 1080;
+    };
+
+    async.series([
+      $.go('visit', x.website),
+      capture(fileName(x.website, $.config.width))
+    ], function() {
+      $.close();
+    });
+
+  })
+
 }
 
-/* capture page */
-function capture(){
-	return page.render(imagePath());	
-}
+async.series([
+  getWebsite
+]);
 
-/* open url and capture */
-page.open(url, function(status) {
-  console.log("Status: " + status);
-  if(status === "success") {
-    capture()
-    console.log('Image can be found in: '+imagePath())
-  }
-  else{
-    console.log('Could not load page');
-  }
-  phantom.exit();
-});
