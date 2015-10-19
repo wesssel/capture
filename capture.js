@@ -56,7 +56,13 @@ function capture(){
 
 /* open url and capture */
 page.open(url, function(status) {
-  capture()
-  console.log('Image can be found in: '+imagePath())
+  console.log("Status: " + status);
+  if(status === "success") {
+    capture()
+    console.log('Image can be found in: '+imagePath())
+  }
+  else{
+    console.log('Could not load page');
+  }
   phantom.exit();
 });
